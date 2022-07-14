@@ -1,5 +1,5 @@
 # Vue-monster-slayer
-A hand-holding project that helps student learn the basic of Vue.js
+A hand-holding project that helps student learn the basic of Vue.js <br>
 [Live Demo](https://moonydog12.github.io/Vue-monster-slayer/)
 ### Directives we practice in the project 
 * **v-bind** to bind attribute in HTML element
