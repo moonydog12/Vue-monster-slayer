@@ -8,14 +8,14 @@ A hand-holding project that helps student learn the basic of Vue.js <br>
 * **v-for** to render repetitive element
 
 ### Options we use in js file
-* **data**
+* **data**<br>
 Store play、monster data、current round number to track status change
 & record the result of final winner
 & logMessages as an array to print something on the screen
 * **computed**
     * playerBarStyle & monsterBarStyle : use inline CSS to change bar width when data change
     * canUseSpecialAttack : track current round to toggle special attack
-* **watch**
+* **watch**<br>
 watch playerHealth & monsterHealth to change result variable
 * **methods**
     * startGame : to restart the game
