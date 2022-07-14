@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Monster Slayer</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <!-- 用v-bind 綁定 computed option 裡面的 monsterBarStyles property -->
+          <div class="healthbar__value" :style="monsterBarStyles"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <!-- 用v-bind 綁定 computed option 裡面的 playerBarStyles property -->
+          <div class="healthbar__value" :style="playerBarStyles"></div>
+        </div>
+      </section>
+      <!-- Vue 條件判斷顯示 -->
+      <section class="container" v-if="result">
+        <h2>Game over</h2>
+        <h3 v-if="result==='monster'">You lost</h3>
+        <h3 v-else-if="result==='player'">You won</h3>
+        <h3 v-else>It's draw</h3>
+        <!-- 重新遊戲 -->
+        <button @click="startGame">Start new game</button>
+      </section>
+      <!-- 兩種寫法 -->
+      <!-- <section id="controls" v-if="!result"> -->
+      <section id="controls" v-else>
+        <!-- 如果沒有result,這個區塊才顯示 -->
+        <button @click="attackMonster">ATTACK</button>
+        <button
+          class="specialAttackBtn"
+          :disabled="canUseSpecialAttack"
+          @click="specialAttackMonster"
+        >
+          SPECIAL ATTACK
+        </button>
+        <button @click="healPlayer">HEAL</button>
+        <button @click="surrender">SURRENDER</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <!-- use v-for to print every element in logMessages array -->
+          <li v-for="message in logMessages">
+            <!-- 沒辦法使用 computed property -->
+            <span
+              :class="{'log--player':message.actionBy==='player','log--monster':message.actionBy==='monster'}"
+              >{{ message.actionBy === 'player'? 'Player ':'Monster ' }}
+            </span>
+            <span v-if="message.actionType ==='heal'"
+              >heals himself for
+              <span class="log--heal">{{message.actionValue}}</span></span
+            >
+            <span v-else
+              >attacks and deals
+              <span class="log--damage">{{ message.actionValue }}</span></span
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
